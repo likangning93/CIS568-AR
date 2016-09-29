@@ -10,7 +10,7 @@ public class MobileShooter : MonoBehaviour {
     public Button ShootFrontButton;
 
     bool started = false;
-    //float swipespeed_max = 5; // 0.2s cross screen height
+    float swipespeed_max = 5; // 0.2s cross screen height
     float swipespeed_min = 1; // 1s cross screen height
     //float ballspeed_max = 25f;
     //float ballspeed_min = 2f;
@@ -61,9 +61,9 @@ public class MobileShooter : MonoBehaviour {
             Vector3 swipe_vel = delta / mousedowned_time;
 
 
-            if (swipe_vel.y > swipespeed_min)
+            if (swipe_vel.y > 0.1f)
             {
-                ShootBallUp();
+                ShootBallUp(Mathf.Max(swipespeed_min, Mathf.Min(swipe_vel.y, swipespeed_max)));
             }
 
 
@@ -88,7 +88,6 @@ public class MobileShooter : MonoBehaviour {
         //   the ownership of the ball to PC so the ball is correctly destroyed
         //   upon hitting a wall.
         GameObject ball = PhotonNetwork.Instantiate("ball", ARCamera.transform.position, Quaternion.identity, 0);
-        BallBehavior behavior = ball.GetComponent<BallBehavior>();
         PhotonView ballPhotonView = ball.GetComponent<PhotonView>();
         ballPhotonView.RPC("RPCInitialize", PhotonTargets.All, velocity, color_v);
     }
@@ -100,8 +99,8 @@ public class MobileShooter : MonoBehaviour {
         ShootBall(ballSpeedFixed * ARCamera.transform.forward);
     }
 
-    public void ShootBallUp()
+    public void ShootBallUp(float speed)
     {
-        ShootBall(ballSpeedFixed * ARCamera.transform.up);
+        ShootBall(ballSpeedFixed * speed * ARCamera.transform.up);
     }
 }
