@@ -26,7 +26,8 @@ public class MobileNetwork_Cube : Photon.PunBehaviour
     {
         base.OnJoinedRoom();
         roomName = PhotonNetwork.room.name;
-        PhotonNetwork.Instantiate("PhoneCube", new Vector3(0, 0, 0), Quaternion.identity, 0); 
+        GameObject cube = PhotonNetwork.Instantiate("PhoneCube", new Vector3(0, 0, 0), Quaternion.identity, 0);
+        GetComponent<GyroController>().ControlledObject = cube;
     }
 
     void OnGUI()
@@ -34,13 +35,4 @@ public class MobileNetwork_Cube : Photon.PunBehaviour
         GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
         GUILayout.Label("Room Name: " + roomName);
     }
-
-    //public override void OnJoinedRoom()
-    //{
-    //    //TODO-1.c: use PhotonNetwork.Instantiate to create a "PhoneCube" across the network
-    //    var cube =
-    //    GetComponent<GyroController>().ControlledObject = cube;
-    //}
-
-
 }

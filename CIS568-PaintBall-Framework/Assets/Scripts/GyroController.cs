@@ -17,6 +17,7 @@ public class GyroController : MonoBehaviour
 
     Quaternion qRefObject = Quaternion.identity;
     Quaternion qRefGyro = Quaternion.identity;
+    Quaternion qRefGyroInverse = Quaternion.identity;
     Gyroscope gyro;
 
     GameObject controlledObject;
@@ -68,7 +69,8 @@ public class GyroController : MonoBehaviour
             // TODO-1.d & TODO-2.a:
             //   rotate the camera or cube based on qRefObject, qRefGyro and current 
             //   data from gyroscope
-            //controlledObject.transform.rotation = 
+            Quaternion dRotation = qRefGyroInverse * ConvertRotation(gyro.attitude);
+            controlledObject.transform.rotation = qRefObject * dRotation;
         }
     }
 
@@ -80,6 +82,7 @@ public class GyroController : MonoBehaviour
         }
         qRefObject = controlledObject.transform.rotation;
         qRefGyro = ConvertRotation(Input.gyro.attitude);
+        qRefGyroInverse = Quaternion.Inverse(qRefGyro);
     }
 
     //// Possible helper function to smooth between gyro and Vuforia
