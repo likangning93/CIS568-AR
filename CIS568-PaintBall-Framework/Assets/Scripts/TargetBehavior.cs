@@ -54,7 +54,8 @@ public class TargetBehavior : MonoBehaviour, ITrackableEventHandler
                 // You may want to use ResumeTracking(), PauseTracking() and 
                 //   GyroController.Paused .
                 tracked = true;
-
+                CameraGyro.Paused = true;
+                CameraGyro.ResetOrientation();
 
                 TrackButton.image.color = new Color(0.4f, 1, 0.1f, 0.5f);
                 break;
@@ -63,12 +64,17 @@ public class TargetBehavior : MonoBehaviour, ITrackableEventHandler
                 //   and update ARCamera.
                 // TODO-2.b
                 tracked = false;
+                CameraGyro.Paused = true;
+                CameraGyro.ResetOrientation();
+
 
                 TrackButton.image.color = new Color(0.7f, 0.5f, 0.1f, 0.5f);
                 break;
             default:
                 tracked = false;
+
                 // TODO-2.b
+                CameraGyro.Paused = false;
 
                 TrackButton.image.color = new Color(1, 0.1f, 0.1f, 0.5f);
                 break;

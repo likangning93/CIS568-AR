@@ -87,6 +87,10 @@ public class MobileShooter : MonoBehaviour {
         //   of the ball across all clients (PhotonTargets.All) and transfer 
         //   the ownership of the ball to PC so the ball is correctly destroyed
         //   upon hitting a wall.
+        GameObject ball = PhotonNetwork.Instantiate("ball", ARCamera.transform.position, Quaternion.identity, 0);
+        BallBehavior behavior = ball.GetComponent<BallBehavior>();
+        PhotonView ballPhotonView = ball.GetComponent<PhotonView>();
+        ballPhotonView.RPC("RPCInitialize", PhotonTargets.All, velocity, color_v);
     }
 
 

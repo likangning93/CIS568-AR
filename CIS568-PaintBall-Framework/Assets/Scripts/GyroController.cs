@@ -50,6 +50,7 @@ public class GyroController : MonoBehaviour
         GUILayout.Label("Gyroscope userAcceleration : " + gyro.userAcceleration);
         GUILayout.Label("Ref camera rotation:" + qRefObject);
         GUILayout.Label("Ref gyro attitude:" + qRefGyro);
+        GUILayout.Label("Paused:" + Paused);
     }
 
     // LOOK-1.d:

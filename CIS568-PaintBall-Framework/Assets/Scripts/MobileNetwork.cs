@@ -26,6 +26,6 @@ public class MobileNetwork : Photon.PunBehaviour
     public override void OnJoinedRoom()
     {
         roomName = PhotonNetwork.room.name;
-        //GetComponent<MobileShooter>().Activate();
+        GetComponent<MobileShooter>().Activate();
     }
 }
