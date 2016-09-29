@@ -8,9 +8,29 @@ public class MobileNetwork_Cube : Photon.PunBehaviour
     //   the room name in case there are more people playing
     //   your game - though it is not required for the assignment.
 
+    string roomName;
+
+    void Start()
+    {
+        PhotonNetwork.ConnectUsingSettings("0.1");
+    }
+
+    public override void OnJoinedLobby()
+    {
+        PhotonNetwork.JoinRandomRoom();
+    }
+
+
+    public override void OnJoinedRoom()
+    {
+        base.OnJoinedRoom();
+        roomName = PhotonNetwork.room.name;
+    }
+
     void OnGUI()
     {
         GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
+        GUILayout.Label("Room Name: " + roomName);
     }
 
     //public override void OnJoinedRoom()

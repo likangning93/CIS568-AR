@@ -36,6 +36,11 @@ public class GyroController : MonoBehaviour
 
     void OnGUI()
     {
+        GUILayout.Label("");
+        GUILayout.Label("");
+        GUILayout.Label("");
+        GUILayout.Label("");
+
         GUILayout.Label("Gyroscope attitude : " + gyro.attitude);
         GUILayout.Label("Gyroscope gravity : " + gyro.gravity);
         GUILayout.Label("Gyroscope rotationRate : " + gyro.rotationRate);
