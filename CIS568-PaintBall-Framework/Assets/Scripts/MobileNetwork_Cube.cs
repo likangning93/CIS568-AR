@@ -10,6 +10,7 @@ public class MobileNetwork_Cube : Photon.PunBehaviour
 
     string roomName;
 
+
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings("0.1");
@@ -25,6 +26,7 @@ public class MobileNetwork_Cube : Photon.PunBehaviour
     {
         base.OnJoinedRoom();
         roomName = PhotonNetwork.room.name;
+        PhotonNetwork.Instantiate("PhoneCube", new Vector3(0, 0, 0), Quaternion.identity, 0); 
     }
 
     void OnGUI()
